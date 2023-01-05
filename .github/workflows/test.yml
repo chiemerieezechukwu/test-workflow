@@ -27,6 +27,6 @@ jobs:
 
           # Print the split string
           echo "Split string: ${args_list[@]}, concatenated: ${build_args_concat[@]}"
-          echo "::set-output name=value::${{ inputs.build_arg }}"
+          echo "::set-output name=value::$build_args_concat"
       - name: Test echo value
         run: echo ${{ steps.args.outputs.value }}
