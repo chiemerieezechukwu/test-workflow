@@ -5,8 +5,10 @@ on:
       - main
 
 jobs:
-  call-test:
-    name: Test
+  call-test-with-args:
     uses: ./.github/workflows/test.yml
-    # with:
-    #   build_args: EXAMPLE_ARG_1=1,EXAMPLE_ARG_2=2
+    with:
+      build_args: EXAMPLE_ARG_1=1,EXAMPLE_ARG_2=2
+
+  call-test-without-args:
+    uses: ./.github/workflows/test.yml

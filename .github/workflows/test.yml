@@ -27,7 +27,8 @@ jobs:
 
           # Print the split string
           echo "Split string: ${args_list[@]}, concatenated: ${build_args_concat[@]}"
-          echo "::set-output name=value::${build_args_concat[@]}"
+          echo "value=${build_args_concat[@]}" >> $GITHUB_OUTPUT
       - name: Docker build
         run: |
+          echo "docker build . -t test ${{ steps.args.outputs.value }}"
           docker build . -t test ${{ steps.args.outputs.value }}
