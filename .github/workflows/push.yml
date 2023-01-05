@@ -1,0 +1,12 @@
+name: Release
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  call-test:
+    name: Test
+    uses: ./.github/workflows/test.yml
+    with:
+      build_args: EXAMPLE_ARG=1,EXAMPLE_ARG2=2

@@ -1,0 +1,32 @@
+on:
+  workflow_call:
+    inputs:
+      build_args:
+        type: string
+        description: 'Value to supply to the docker build --build-arg flag. Multiple values should be comma delimited. Example: EXAMPLE_ARG=1,EXAMPLE_ARG2=2'
+        required: false
+
+jobs:
+  args:
+    runs-on: ubuntu-latest
+    outputs:
+      semver: ${{ steps.args.outputs.value }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Run script to build args
+        id: args
+        run: |
+          # Split the string
+          IFS="," read -ra args_list <<< "${{ inputs.build_args }}"
+
+          # add the --build-arg flag to each item in the array
+          for arg in "${args_list[@]}"; do
+            build_args_concat+=("--build-arg $arg")
+          done
+
+          # Print the split string
+          echo "Split string: ${args_list[@]}, concatenated: ${build_args_concat[@]}"
+          echo "::set-output name=value::${{ inputs.build_arg }}"
+      - name: Test echo value
+        run: echo ${{ steps.args.outputs.value }}
