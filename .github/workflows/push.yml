@@ -8,5 +8,5 @@ jobs:
   call-test:
     name: Test
     uses: ./.github/workflows/test.yml
-    with:
-      build_args: EXAMPLE_ARG=1,EXAMPLE_ARG2=2
+    # with:
+    #   build_args: EXAMPLE_ARG_1=1,EXAMPLE_ARG_2=2
